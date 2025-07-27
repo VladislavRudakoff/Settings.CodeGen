@@ -1,3 +1,5 @@
+[![Publish NuGet Package](https://github.com/VladislavRudakoff/Settings.CodeGen/actions/workflows/publish-nuget.yml/badge.svg)](https://github.com/VladislavRudakoff/Settings.CodeGen/actions/workflows/publish-nuget.yml)
+
 # Settings.CodeGen
 
 Generates strongly-typed constants for appsettings.json(appsettings.{Environment}.json) configuration keys. This helps prevent typos and improves refactorability when accessing configuration values.
