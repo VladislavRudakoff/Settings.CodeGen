@@ -3,15 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Settings.CodeGen</PackageId>
+    <Title>Settings.CodeGen</Title>
     <AssemblyName>Settings.CodeGen</AssemblyName>
-    <PackageVersion>1.0.0-rc01</PackageVersion>
     <Authors>VladislavRudakoff</Authors>
     <Description>Generates strongly-typed constants for appsettings.json configuration keys</Description>
     <PackageTags>configuration;appsettings;codegen;msbuild</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <GenerateDependencyFile>true</GenerateDependencyFile>
-    <Copyright>Copyright (c) 2025</Copyright>
+    <Copyright>Copyright (c) VladislavRudakoff 2025</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <DevelopmentDependency>true</DevelopmentDependency>
@@ -23,6 +22,11 @@
     <DebugType>embedded</DebugType>
     <IsPackable>true</IsPackable>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <RepositoryUrl>https://github.com/VladislavRudakoff/Settings.CodeGen.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -37,6 +41,7 @@
     <Content Include="build\Settings.CodeGen.targets" PackagePath="build\" />
     <Content Include="build\Settings.CodeGen.props" PackagePath="build\" />
     <Content Include="README.md" PackagePath="\" />
+    <None Include="..\..\images\icon.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <Target Name="IncludeDependencies" BeforeTargets="_GetPackageFiles">
