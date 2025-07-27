@@ -1,0 +1,28 @@
+<Project>
+
+  <Target Name="GenerateSettingsKeys"
+          BeforeTargets="BeforeBuild;_GenerateCompileDependencyCache"
+          Condition="'$(DesignTimeBuild)' != 'true' AND '$(SettingsCodeGenEnabled)' == 'true'">
+
+    <Message Text="Generate settings file" Importance="Low" />
+
+    <SettingsCodeGenTask SettingsProjectDir="$(SettingsCodeGenProjectDir)"
+                         SettingsNamespaceName="$(SettingsCodeGenNamespace)"
+                         SettingsCodeGenLocalization="$(SettingsCodeGenLocalization)"
+                         MarkerOutputPath="$(OutputPath)">
+      <Output TaskParameter="GeneratedFileDir" PropertyName="SettingsDirName" />
+    </SettingsCodeGenTask>
+
+    <Message Text="Settings file: $(SettingsDirName)\AppSettingsKeys.appsettings.g.cs" Importance="High" />
+  </Target>
+
+  <Target Name="CleanGeneratedSettings"
+          AfterTargets="Clean"
+          Condition="'$(SettingsCodeGenEnabled)' == 'true'">
+
+    <Message Text="Cleaning generated settings file" Importance="Low" />
+
+    <RemoveDir Directories="$(SettingsCodeGenProjectDir)\Generated" />
+  </Target>
+
+</Project>

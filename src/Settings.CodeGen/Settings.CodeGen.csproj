@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>Settings.CodeGen</PackageId>
+    <AssemblyName>Settings.CodeGen</AssemblyName>
+    <PackageVersion>1.0.0-rc01</PackageVersion>
+    <Authors>VladislavRudakoff</Authors>
+    <Description>Generates strongly-typed constants for appsettings.json configuration keys</Description>
+    <PackageTags>configuration;appsettings;codegen;msbuild</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <GenerateDependencyFile>true</GenerateDependencyFile>
+    <Copyright>Copyright (c) 2025</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <NoWarn>NU5100;NU5128</NoWarn>
+    <DebugType>embedded</DebugType>
+    <IsPackable>true</IsPackable>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Framework" Version="17.14.8" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.14.8" PrivateAssets="all" ExcludeAssets="Runtime">
+      <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Text.Json" Version="9.0.7" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="build\Settings.CodeGen.targets" PackagePath="build\" />
+    <Content Include="build\Settings.CodeGen.props" PackagePath="build\" />
+    <Content Include="README.md" PackagePath="\" />
+  </ItemGroup>
+
+  <Target Name="IncludeDependencies" BeforeTargets="_GetPackageFiles">
+    <ItemGroup>
+      <None Include="$(OutputPath)\*.dll" PackagePath="tasks\netstandard2.0" Pack="true" />
+    </ItemGroup>
+  </Target>
+
+</Project>

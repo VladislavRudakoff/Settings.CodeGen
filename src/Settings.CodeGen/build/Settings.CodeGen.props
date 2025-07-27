@@ -1,0 +1,17 @@
+<Project>
+
+  <PropertyGroup>
+    <CustomTasksFolder>$(MSBuildThisFileDirectory)..\tasks\netstandard2.0</CustomTasksFolder>
+    <CustomTasksAssembly>$(CustomTasksFolder)\$(MSBuildThisFileName).dll</CustomTasksAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <SettingsCodeGenNamespace Condition="'$(SettingsCodeGenNamespace)' == ''">$(MSBuildProjectName).Generated</SettingsCodeGenNamespace>
+    <SettingsCodeGenProjectDir Condition="'$(SettingsCodeGenProjectDir)' == ''">$(MSBuildProjectDirectory)</SettingsCodeGenProjectDir>
+    <SettingsCodeGenLocalization Condition="'$(SettingsCodeGenLocalization)' == ''">en</SettingsCodeGenLocalization>
+    <SettingsCodeGenEnabled Condition="'$(SettingsCodeGenEnabled)' == ''">true</SettingsCodeGenEnabled>
+  </PropertyGroup>
+
+  <UsingTask TaskName="SettingsCodeGenTask" AssemblyFile="$(CustomTasksAssembly)" />
+
+</Project>
