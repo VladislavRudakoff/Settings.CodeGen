@@ -703,7 +703,7 @@ csharp_style_expression_bodied_lambdas = true:silent
 # Suggest using top level route registrations
 dotnet_diagnostic.ASP0014.severity = suggestion
 
-[**/tests/**/*Tests.cs]
+[**/*Tests.cs]
 dotnet_analyzer_diagnostic.severity = silent
 
 [**/*.Database/**/*]

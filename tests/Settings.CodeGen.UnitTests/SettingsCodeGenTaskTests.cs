@@ -1,10 +1,16 @@
 namespace Settings.CodeGen.UnitTests;
 
+/// <summary>
+/// Тесты для задачи SettingsCodeGenTask
+/// </summary>
 public class SettingsCodeGenTaskTests : IDisposable
 {
     private readonly string testDirectory;
     private readonly MockBuildEngine buildEngine;
 
+    /// <summary>
+    /// Инициализация тестов
+    /// </summary>
     public SettingsCodeGenTaskTests()
     {
         testDirectory = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
@@ -12,10 +18,13 @@ public class SettingsCodeGenTaskTests : IDisposable
         buildEngine = new();
     }
 
+    /// <summary>
+    /// Тестирование генерации класса из appsettings.json
+    /// </summary>
     [Fact]
     public void Execute_WithValidAppSettings_GeneratesClass()
     {
-        const string appSettingsContent = """
+        const string appSettingsContent = /*lang=json,strict*/ """
                                           {
                                             "ConnectionStrings": {
                                               "DefaultConnection": "Server=localhost;Database=Test"
@@ -50,11 +59,14 @@ public class SettingsCodeGenTaskTests : IDisposable
         Assert.Contains("public const string Section = \"ConnectionStrings\";", generatedCode);
     }
 
+    /// <summary>
+    /// Тестирование генерации класса с несколькими appsettings.json
+    /// </summary>
     [Fact]
     public void Execute_WithMultipleAppSettings_MergesCorrectly()
     {
-        const string appSettings = """{"Database": {"Host": "localhost"}}""";
-        const string appSettingsDev = """{"Database": {"Port": 5432}, "Debug": true}""";
+        const string appSettings = /*lang=json,strict*/ """{"Database": {"Host": "localhost"}}""";
+        const string appSettingsDev = /*lang=json,strict*/ """{"Database": {"Port": 5432}, "Debug": true}""";
         File.WriteAllText(Path.Combine(testDirectory, "appsettings.json"), appSettings);
         File.WriteAllText(Path.Combine(testDirectory, "appsettings.Development.json"), appSettingsDev);
         SettingsCodeGenTask task = new()
@@ -73,11 +85,14 @@ public class SettingsCodeGenTaskTests : IDisposable
         Assert.Contains("public const string Debug = \"Debug\";", generatedCode);
     }
 
+    /// <summary>
+    /// Тестирование обработки некорректного JSON
+    /// </summary>
     [Fact]
     public void Execute_WithInvalidJson_ContinuesWithWarning()
     {
         File.WriteAllText(Path.Combine(testDirectory, "appsettings.json"), "invalid json");
-        File.WriteAllText(Path.Combine(testDirectory, "appsettings.Development.json"), """{"Valid": "setting"}""");
+        File.WriteAllText(Path.Combine(testDirectory, "appsettings.Development.json"), /*lang=json,strict*/ """{"Valid": "setting"}""");
         SettingsCodeGenTask task = new()
         {
             SettingsProjectDir = testDirectory,
@@ -96,6 +111,9 @@ public class SettingsCodeGenTaskTests : IDisposable
         Assert.Contains("public const string Valid = \"Valid\";", generatedCode);
     }
 
+    /// <summary>
+    /// Тестирование отсутствия appsettings.json
+    /// </summary>
     [Fact]
     public void Execute_WithNoAppSettings_ReturnsTrue()
     {
@@ -113,10 +131,13 @@ public class SettingsCodeGenTaskTests : IDisposable
         Assert.False(Directory.Exists(Path.Combine(testDirectory, "Generated")));
     }
 
+    /// <summary>
+    /// Тестирование генерации классов с именами, содержащими специальные символы
+    /// </summary>
     [Fact]
     public void Execute_WithSpecialCharacters_GeneratesValidClassNames()
     {
-        const string appSettings = """
+        const string appSettings = /*lang=json,strict*/ """
                                    {
                                      "some-key": "value",
                                      "another.key": "value2",
@@ -143,11 +164,14 @@ public class SettingsCodeGenTaskTests : IDisposable
         Assert.Contains("public const string _123numeric = \"123numeric\";", generatedCode);
     }
 
+    /// <summary>
+    /// Тестирование генерации ключей для массивов в appsettings.json
+    /// </summary>
     [Fact]
     public void Execute_WithArrayInAppSettings_GeneratesIndexedKeys()
     {
         // Arrange
-        const string appSettingsContent = """
+        const string appSettingsContent = /*lang=json,strict*/ """
                                           {
                                             "AllowedHosts": [ "localhost", "example.com" ],
                                             "DetailedSettings": {

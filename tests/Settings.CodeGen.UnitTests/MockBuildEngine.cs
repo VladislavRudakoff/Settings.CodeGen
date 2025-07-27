@@ -1,16 +1,26 @@
+using System.Collections.ObjectModel;
+
 namespace Settings.CodeGen.UnitTests;
 
+/// <summary>
+/// Mock для IBuildEngine, используемый в тестах
+/// </summary>
 public class MockBuildEngine : IBuildEngine
 {
-    private readonly List<string> loggedMessages = [];
-    private readonly List<string> loggedWarnings = [];
-    private readonly List<string> loggedErrors = [];
+    /// <summary>
+    /// Залоггированные сообщения
+    /// </summary>
+    public Collection<string> LoggedMessages { get; } = [];
 
-    public List<string> LoggedMessages => loggedMessages;
+    /// <summary>
+    /// Залоггированные предупреждения
+    /// </summary>
+    public Collection<string> LoggedWarnings { get; } = [];
 
-    public List<string> LoggedWarnings => loggedWarnings;
-
-    public List<string> LoggedErrors => loggedErrors;
+    /// <summary>
+    /// Залоггированные ошибки
+    /// </summary>
+    public Collection<string> LoggedErrors { get; } = [];
 
     /// <inheritdoc />
     public bool ContinueOnError => false;
@@ -29,7 +39,7 @@ public class MockBuildEngine : IBuildEngine
     {
         if (e.Message is not null)
         {
-            loggedErrors.Add(e.Message);
+            LoggedErrors.Add(e.Message);
         }
     }
 
@@ -38,7 +48,7 @@ public class MockBuildEngine : IBuildEngine
     {
         if (e.Message is not null)
         {
-            loggedWarnings.Add(e.Message);
+            LoggedWarnings.Add(e.Message);
         }
     }
 
@@ -47,7 +57,7 @@ public class MockBuildEngine : IBuildEngine
     {
         if (e.Message is not null)
         {
-            loggedMessages.Add(e.Message);
+            LoggedMessages.Add(e.Message);
         }
     }
 
@@ -56,7 +66,7 @@ public class MockBuildEngine : IBuildEngine
     {
         if (e.Message is not null)
         {
-            loggedMessages.Add(e.Message);
+            LoggedMessages.Add(e.Message);
         }
     }
 
