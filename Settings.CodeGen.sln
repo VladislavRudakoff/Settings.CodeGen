@@ -22,6 +22,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Settings.CodeGen.UnitTests", "tests\Settings.CodeGen.UnitTests\Settings.CodeGen.UnitTests.csproj", "{20A59381-1F45-480E-845A-72353FB4E403}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{011BDCA8-E5EE-9E14-FF24-A59B216152F3}"
+	ProjectSection(SolutionItems) = preProject
+		images\icon.png = images\icon.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
