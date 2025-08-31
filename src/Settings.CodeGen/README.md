@@ -48,7 +48,7 @@ __To use defaults (generate in `$(MSBuildProjectName).Generated.AppSettingsKeys`
 __To disable generation for a specific project:__
 ```xml
 <PropertyGroup>
-  <SettingsCodeGenEnabled>true</SettingsCodeGenEnabled>
+  <SettingsCodeGenEnabled>false</SettingsCodeGenEnabled>
 </PropertyGroup>
 ```
 
